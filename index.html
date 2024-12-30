@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Checker</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        /* Navigation Bar Styling */
+        nav {
+            background-color: #007bff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            font-size: 18px;
+            padding: 12px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        .form-control {
+            background-color: #f1f1f1;
+            border: 2px solid #ccc;
+            color: #333;
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: #007bff;
+            color: #333;
+        }
+
+        .btn {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            width: 100%;
+            font-size: 18px;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Animation for moving name */
+        .animated-name {
+            font-size: 40px;
+            font-weight: bold;
+            color: #007bff;
+            position: fixed;
+            top: 10px;
+            width: 100%;
+            white-space: nowrap;
+            animation: moveName 10s linear infinite;
+            padding: 10px;
+        }
+
+        @keyframes moveName {
+            0% {
+                left: 100%;
+            }
+
+            100% {
+                left: -100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Display the animated message here -->
+    <div id="animated-message" class="animated-name"></div>
+
+    <!-- Result Checker Form -->
+    <div class="container">
+        <h2>Student Result Checker</h2>
+
+        <div class="mb-3">
+            <label for="studentName" class="form-label">Enter Student Name</label>
+            <input type="text" class="form-control" id="studentName" placeholder="Enter Student Name">
+        </div>
+
+        <button class="btn" onclick="showResult()">Check Result</button>
+
+        <div id="resultDisplay" class="result"></div>
+        <div id="errorDisplay" class="result text-danger"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>© 2024 Student Result Website | Created by Engr. Muhammad Waseem</p>
+    </div>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Sample Student Data
+        const students = {
+            "Muneeb": { result: "Pass/80" },
+            "Tariq": { result: "Pass/60" },
+            "Fahad": { result: "Pass/75" },
+            "Rubab Tawakal": { result: "Pass/60" },
+            "Awais": { result: "75" },
+            "Haseeb": { result: "Pass/90" }
+        };
+
+        // Function to display result
+        function showResult() {
+            const studentName = document.getElementById("studentName").value.trim();
+            const resultDisplay = document.getElementById("resultDisplay");
+            const errorDisplay = document.getElementById("errorDisplay");
+
+            // Reset previous result and error
+            resultDisplay.innerHTML = "";
+            errorDisplay.innerHTML = "";
+
+            // Check if student exists in data
+            if (students[studentName]) {
+                const student = students[studentName];
+                resultDisplay.innerHTML = `Student: ${studentName}<br>Result: ${student.result}`;
+
+                // Color the result based on pass/fail
+                if (student.result === "Pass") {
+                    resultDisplay.style.color = "#28a745"; // Green for pass
+                } else {
+                    resultDisplay.style.color = "#dc3545"; // Red for fail
+                }
+            } else {
+                errorDisplay.innerHTML = "Student not found. Please enter a valid name.";
+            }
+        }
+
+        // Create and animate the "Keep learning with Bhai Muhammad Waseem" message with JavaScript
+        window.onload = function () {
+            const message = "Keep learning with Bhai Muhammad Waseem";
+            const messageElement = document.getElementById("animated-message");
+            messageElement.innerText = message;
+        };
+    </script>
+
+</body>
+
+</html>
